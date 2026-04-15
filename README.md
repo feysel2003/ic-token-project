@@ -7,6 +7,7 @@ dfx identity get-principal
 ```
 
 2. Save it somewhere.
+Newone =  t3awl-qepnk-7wxvw-xqv7s-wltvf-phedk-z3gjt-jenng-4e3vr-b6zh4-tae
 
 e.g. My principal id is: gbdev-tyqsv-hnvqv-7mgz4-4kcfl-wbv6x-6khez-y56gq-uohqs-quomc-uqe
 
