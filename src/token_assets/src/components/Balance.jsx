@@ -5,11 +5,13 @@ import { token } from "../../../declarations/token";
 function Balance() {
   const [inputValue, setInput] = useState("");
   const [balanceResult, setBalance] = useState("");
-
+  const [cryptoSymbol, setSymbol] = useState("");
+  const [isHeading, setHeading] = useState(true);
   async function handleClick() {
     const principal = Principal.fromText(inputValue);
     const balance = await token.balanceOf(principal);
     setBalance(balance.toLocaleString());
+    setSymbol(await token.getSymbol());
   }
 
   return (
@@ -33,7 +35,9 @@ function Balance() {
         </button>
       </p>
       {/* FIXED: Changed balance to balanceResult */}
-      <p>This account has a balance of {balanceResult}.</p> 
+      <p hidden={isHeading}>
+        This account has a balance of {balanceResult} {cryptoSymbol}.
+      </p>
     </div>
   );
 }
