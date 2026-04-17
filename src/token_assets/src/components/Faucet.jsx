@@ -1,16 +1,16 @@
 import React from "react";
 import { token } from "../../../declarations/token";
-import { setTextRange } from "typescript";
+import { useState } from "react";
 
 function Faucet() {
 
   const [disable, setDisable] = useState(false);
   const [buttonText, setText] = useState("Gimme gimme");
-  
+
   async function handleClick(event) {
 setDisable(true);
 const result = await token.payout();
-setTextRange(result);
+setText(result);
   }
 
   return (
