@@ -10,7 +10,7 @@ actor Token {
   var balances = HashMap.HashMap<Principal, Nat>(1, Principal.equal, Principal.hash);
   
   // FIX 1: Motoko requires you to write "ignore" when a function returns a value that you don't save to a variable.
-  ignore balances.put(owner, totalSupply);
+   balances.put(owner, totalSupply);
 
   public query func balanceOf(who : Principal) : async Nat {
     let balance : Nat = switch (balances.get(who)) {
@@ -33,7 +33,7 @@ actor Token {
     let amount : Nat = 10000;
 
     if (balances.get(msg.caller) == null) {
-      ignore balances.put(msg.caller, amount); // Added 'ignore' here too
+       balances.put(msg.caller, amount); // Added 'ignore' here too
       return "success";
     } 
     else {
@@ -43,16 +43,16 @@ actor Token {
   };
   
   // FIX 4: Functions that use 'await' must be labeled as 'async'. 
-  public shared func transfer(to: principal, amount:Nat) : async Text {
+  public shared(msg) func transfer(to: Principal, amount:Nat) : async Text {
     
     let fromBalance = await balanceOf(msg.caller);
     if (fromBalance >= amount) {
       let newFromBalance = fromBalance - amount;
-      ignore balances.put(msg.caller, newFromBalance); // Added 'ignore' here too   
+       balances.put(msg.caller, newFromBalance); // Added 'ignore' here too   
       let toBalance = await balanceOf(to);
       let newToBalance = toBalance + amount;
-      ignore balances.put(to, newToBalance); // Added 'ignore' here too 
-      
+       balances.put(to, newToBalance); // Added 'ignore' here too 
+
       return "success";
     } else {
       return "Insufficient balance";
